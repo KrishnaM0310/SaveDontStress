@@ -2,6 +2,7 @@
 # SaveDontStress
 
 **SaveDontStress** (also known as **GemGrocery**) is a web application that helps users find the cheapest grocery item near a specified location. The front end uses **React** (with **Google Places Autocomplete** for addresses) and displays the resulting store data in a table and chart. The back end is a **Node/Express** server that calls **Google Places** for store listings and **Gemini (Generative Language API)** to produce JSON code blocks with approximate prices or placeholders.
+![image](https://github.com/user-attachments/assets/84a633d6-7bf5-48ce-92a6-f5fa8252623c)
 
 ## Table of Contents
 - [Overview](#overview)
