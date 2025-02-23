@@ -49,10 +49,6 @@ SaveDontStress/
   └── README.md
 ```
 
-### Folders:
-- `backend/`: Node/Express code for `/api/cheapest-item`. Calls Google Places and Gemini.
-- `frontend/`: React application. Displays an address input (with Google Places Autocomplete) and item input, then renders results in a table and chart.
-
 ## Prerequisites
 - **Node.js** (v14+ recommended)
 - **npm** or **yarn** (latest stable)
