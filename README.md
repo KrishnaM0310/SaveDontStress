@@ -1,185 +1,126 @@
-# SaveDon'tStress
-
-SaveDon'tStress is a full-stack web application designed to help users figure out the cheapest grocery items in their area without having to search through several sites. The app includes both a frontend and a backend, and here are the steps to set up and run it locally.
-
-## Table of Contents
-- [Technologies Used](#technologies-used)
-- [Setup Instructions](#setup-instructions)
-  - [Frontend Setup](#frontend-setup)
-  - [Backend Setup](#backend-setup)
-- [Running the App](#running-the-app)
-- [Deployment](#deployment)
-
-## Technologies Used
-
-- **Frontend**: 
-  - React
-  - CSS 
-  
-- **Backend**: 
-  - Node.js
-  - Express.js
-  - Google Maps API
-  - Gemini API
-
-## Setup Instructions
-
-### Frontend Setup
-
-1. **Clone the repository**:
-
-   ```bash
-   git clone https://github.com/KrishnaM0310/SaveDontStress.git
-   cd SaveDontStress/my-frontend
-   ```
-
-2. **Install dependencies**:
-
-   Make sure you have `Node.js` and `npm` installed. If not, install them from the [official Node.js website](https://nodejs.org/).
-
-   Run the following command to install all frontend dependencies:
-
-   ```bash
-   npm install
-   ```
-
-3. **Configure environment variables** (if necessary):
-
-   You may need to create a `.env` file in the root of the frontend folder to configure API endpoints, environment settings, etc. Example:
-
-   ```plaintext
-   REACT_APP_API_URL=http://localhost:5000
-   ```
-
-4. **Run the frontend application**:
-
-   After installing dependencies, you can start the frontend server by running:
-
-   ```bash
-   npm start
-   ```
-
-   The frontend should now be running on [http://localhost:3000](http://localhost:3000).
-
----
-
-### Backend Setup
-
-1. **Install Dependencies**:
-
-   Navigate to the backend folder and install the necessary dependencies:
-
-   ```bash
-   cd SaveDontStress/my-backend
-   npm install
-   ```
-
-2. **Configure Environment Variables**:
-
-   You might need to set up a `.env` file in the backend directory for database credentials, API keys, etc. Example `.env` file:
-
-   ```plaintext
-   DB_URI=mongodb://localhost:27017/savedontstress
-   PORT=5000
-   ```
-
-3. **Run the Backend Application**:
-
-   After installing the dependencies and configuring your environment variables, you can start the backend server by running:
-
-   ```bash
-   npm start
-   ```
-
-   The backend should now be running on [http://localhost:5000](http://localhost:5000).
-
----
-
-## Running the App
-
-Once both the frontend and backend are running, you can interact with the application:
-
-1. Open the frontend by navigating to [http://localhost:3000](http://localhost:3000) in your browser.
-2. The frontend will interact with the backend at [http://localhost:5000](http://localhost:5000).
-
-Make sure the backend server is running before trying to use the frontend, as the frontend makes requests to the backend API.
-
----
-
-## Deployment
-
-### Deploying Frontend on GitHub Pages
-
-To deploy your frontend on GitHub Pages:
-
-1. Add `gh-pages` package:
-
-   ```bash
-   npm install gh-pages --save-dev
-   ```
-
-2. In your `package.json` file, add the following fields:
-
-   ```json
-   "homepage": "https://<your-github-username>.github.io/SaveDontStress",
-   "scripts": {
-     "predeploy": "npm run build",
-     "deploy": "gh-pages -d build"
-   }
-   ```
-
-3. Run the deploy script:
-
-   ```bash
-   npm run deploy
-   ```
-
-   Your frontend will now be live on GitHub Pages at the URL specified in the `homepage` field.
-
-### Deploying Backend on Heroku (Example)
-
-If you're using Heroku for the backend, here are the steps:
-
-1. Install the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli).
-
-2. Log in to Heroku:
-
-   ```bash
-   heroku login
-   ```
-
-3. Create a new Heroku app:
-
-   ```bash
-   heroku create
-   ```
-
-4. Deploy the backend:
-
-   ```bash
-   git push heroku main
-   ```
-
-5. Your backend should now be live on the Heroku URL provided.
-
----
-
-## Contributing
-
-If you'd like to contribute to the project, follow these steps:
-
-1. Fork the repository.
-2. Create a new branch (`git checkout -b feature/your-feature`).
-3. Commit your changes (`git commit -am 'Add new feature'`).
-4. Push to your fork (`git push origin feature/your-feature`).
-5. Create a pull request to the main repository.
-
----
-
-## License
-
-This project is licensed under the MIT License.
-
----
-
-Let me know if you need any further changes or assistance!
+SaveDontStress
+SaveDontStress (also known as “GemGrocery”) is a web application that helps users find the cheapest grocery item near a specified location. The front end uses React (with Google Places Autocomplete for addresses) and displays the resulting store data in a table and chart. The back end is a Node/Express server that calls Google Places for store listings and Gemini (Generative Language API) to produce JSON code blocks with approximate prices or placeholders.
+Table of Contents
+Overview
+Project Structure
+Prerequisites
+Installation
+Environment Variables
+Running the Application
+Usage
+Troubleshooting
+License
+
+Overview
+User inputs an address (with fallback geocoding if the user doesn’t pick from the dropdown) and a grocery item (e.g., “milk”).
+Front End calls the back end (/api/cheapest-item) with (latitude, longitude, item).
+Back End:
+Calls Google Places to find up to 10 grocery stores near (lat, lng).
+Builds a prompt for Gemini, asking it to return a JSON code block with store prices.
+Parses that code block and returns a simplified JSON of store data.
+Front End displays:
+A table sorted from cheapest to most expensive.
+A bar chart of prices.
+If disclaimers or no valid JSON, it shows the raw text from Gemini.
+
+Project Structure
+A simplified look at your repository:
+SaveDontStress/
+  ├─ backend/
+  │   ├─ index.js          // Main Express server
+  │   ├─ package.json
+  │   └─ ...other files (e.g., .env, node_modules, etc.)
+  ├─ frontend/
+  │   ├─ src/
+  │   │   ├─ App.js        // Main React logic
+  │   │   └─ App.css       // Styling for table, chart, etc.
+  │   ├─ public/
+  │   ├─ package.json
+  │   └─ ...other files
+  └─ README.md
+
+backend/: Node/Express code for /api/cheapest-item. Calls Google Places and Gemini.
+frontend/: React application. Displays an address input (with Google Places Autocomplete) and item input, then renders results in a table + chart.
+
+Prerequisites
+Node.js (v14+ recommended)
+npm or yarn (latest stable)
+Google Cloud credentials:
+A server or unrestricted key for Google Places (since you’re calling it from Node).
+A Generative Language API key for Gemini (not a service account).
+(Optional) A browser key for Google Maps Autocomplete if you restricted your front-end domain.
+
+Installation
+Clone this repository:
+ git clone https://github.com/KrishnaM0310/SaveDontStress.git
+
+
+Navigate into the project folder:
+ cd SaveDontStress
+
+
+Install dependencies for backend:
+ cd backend
+npm install
+# or yarn
+
+
+Install dependencies for frontend:
+ cd ../frontend
+npm install
+# or yarn
+
+
+
+Environment Variables
+You’ll need a .env file in the backend folder containing at least:
+GOOGLE_MAPS_KEY="YOUR_GOOGLE_PLACES_SERVER_KEY"
+GEMINI_API_KEY="YOUR_GENERATIVE_LANGUAGE_KEY"
+
+GOOGLE_MAPS_KEY: A Places API key with “API restrictions: Places API” and “Application restrictions: None” or “IP addresses” for your Node server.
+GEMINI_API_KEY: A Generative Language API key restricted to generativelanguage.googleapis.com. Service accounts won’t work with the library you used; it needs a direct API key.
+If your front end’s fallback geocode uses a browser key, you can embed that in App.js or in a .env file for React as REACT_APP_GOOGLE_KEY. (In your code snippet, you had it hard-coded, so adapt as needed.)
+
+Running the Application
+After installing and configuring .env, open two terminals:
+1. Start the Backend
+cd backend
+npm start
+
+This typically runs on http://localhost:3001.
+Check the console for “Backend running on http://localhost:3001.”
+2. Start the Front End
+cd ../frontend
+npm start
+
+By default, React dev server runs on http://localhost:3000.
+The front end calls the back end at localhost:3001/api/cheapest-item (as shown in your code).
+
+Usage
+Open your browser at http://localhost:3000.
+Enter an address:
+You can type or pick from Google Places Autocomplete.
+If you type without picking from dropdown, it does a fallback geocode call.
+Enter a grocery item (e.g., “milk”).
+Click Search.
+Observe the results:
+If the back end finds stores, it calls Gemini for a JSON code block.
+The front end sorts the store data by price and shows:
+A table (striped, hover effect, etc.).
+A bar chart with ascending prices.
+If disclaimers or no valid JSON, you see the raw text from Gemini in a <pre> block.
+
+Troubleshooting
+REQUEST_DENIED from Places: Make sure your GOOGLE_MAPS_KEY is a server key with “Places API” enabled, and billing is on.
+API key not valid for Gemini: Ensure GEMINI_API_KEY is a Generative Language key with “API restrictions: generativelanguage.googleapis.com.”
+text.match is not a function: Your code has a fallback that extracts strings from objects. Make sure the LLM actually returns a code block or fallback.
+No grocery stores found: Increase radius from 5000 to 10000 in the back end or verify your lat/lng is correct.
+
+License
+(If your project has a license, mention it here, e.g. MIT or Apache-2.0.)
+MIT License
+Copyright (c) 2025 ...
+Permission is hereby granted...
+
+
+Congratulations! You can now run SaveDontStress (GemGrocery) from scratch by installing dependencies, setting up .env, and starting both servers. If you have any questions, feel free to open an issue or PR on this repo.
