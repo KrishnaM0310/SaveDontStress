@@ -133,15 +133,9 @@ By default, the React dev server runs on [http://localhost:3000](http://localhos
 - **text.match is not a function**: Your code has a fallback that extracts strings from objects. Make sure the **LLM** actually returns a code block or fallback.
 - **No grocery stores found**: Increase the radius from 5000 to 10000 in the backend or verify that your latitude and longitude are correct.
 
-## License
-MIT License  
-Copyright (c) 2025 ...
-
-Permission is hereby granted...
 
 ---
 
 Congratulations! You can now run **SaveDontStress** from scratch by installing dependencies, setting up `.env`, and starting both servers. If you have any questions, feel free to open an issue or pull request on this repo.
 ```
 
-This version uses markdown for clear headings, lists, and code formatting, making it easy to follow and aesthetically organized for anyone viewing your repository.
