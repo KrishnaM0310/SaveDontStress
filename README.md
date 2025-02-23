@@ -1,10 +1,6 @@
-Here is a template for your `README.md` file that includes detailed instructions on how to set up and run your project from scratch:
-
----
-
 # SaveDon'tStress
 
-SaveDon'tStress is a full-stack web application designed to help users manage their stress levels and improve mental well-being. The app includes both a frontend and a backend, and here are the steps to set up and run it locally.
+SaveDon'tStress is a full-stack web application designed to help users figure out the cheapest grocery items in their area without having to search through several sites. The app includes both a frontend and a backend, and here are the steps to set up and run it locally.
 
 ## Table of Contents
 - [Technologies Used](#technologies-used)
