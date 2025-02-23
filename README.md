@@ -14,12 +14,13 @@ SaveDon'tStress is a full-stack web application designed to help users figure ou
 
 - **Frontend**: 
   - React
-  - CSS (or TailwindCSS, depending on your project)
+  - CSS 
   
 - **Backend**: 
   - Node.js
   - Express.js
-  - MongoDB (or any other database you're using)
+  - Google Maps API
+  - Gemini API
 
 ## Setup Instructions
 
